@@ -6,3 +6,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     socketio_baseurl:  'http://localhost:8080'
+    assets_version:    r01
