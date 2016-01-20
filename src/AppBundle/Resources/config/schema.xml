@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="default" namespace="AppBundle\Model">
+    <table name="game">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="status" type="ENUM" valueSet="prepare,gaming,finish" default="prepare"/>
+        <behavior name="timestampable" />
+    </table>
+    <table name="player">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="game_id" type="integer" required="true" />
+        <column name="name" type="varchar" required="true" />
+        <column name="lines" type="integer" default="0" required="true" />
+        <column name="numbers" type="object" />
+        <column name="sort" type="integer" />
+        <unique>
+            <unique-column name="game_id" />
+            <unique-column name="name" />
+        </unique>
+        <foreign-key foreignTable="game">
+            <reference local="game_id" foreign="id"/>
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+    <table name="round">
+        <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+        <column name="game_id" type="integer" required="true"/>
+        <column name="player_id" type="integer" required="true"/>
+        <column name="number" type="integer" required="true"/>
+        <unique>
+            <unique-column name="game_id" />
+            <unique-column name="player_id" />
+            <unique-column name="number" />
+        </unique>
+
+        <foreign-key foreignTable="game">
+            <reference local="game_id" foreign="id"/>
+        </foreign-key>
+
+        <foreign-key foreignTable="player">
+            <reference local="player_id" foreign="id"/>
+        </foreign-key>
+        <behavior name="timestampable" />
+    </table>
+</database>

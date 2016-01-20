@@ -1,0 +1,29 @@
+assetic:
+    assets:
+        base_css:
+            input:
+                -     'components/bootstrap/css/bootstrap.css'
+                -     '@AppBundle/Resources/assets/sass/base.sass'
+            output:   css/base.css
+        base_js:
+            input:
+                -     'components/jquery/jquery.js'
+                -     'components/bootstrap/bootstrap-built.js'
+                -     '@AppBundle/Resources/assets/js/socket.io.js'
+            output:   js/base.js
+        game_js:
+            input:
+                -     '@AppBundle/Resources/assets/coffee/game.coffee'
+            output:   js/game.js
+        play_js:
+                    input:
+                        -     '@AppBundle/Resources/assets/coffee/play.coffee'
+                    output:   js/play.js
+        playing_js:
+                            input:
+                                -     '@AppBundle/Resources/assets/coffee/playing.coffee'
+                            output:   js/playing.js
+        server_js:
+            input:
+                -     '@AppBundle/Resources/server_assets/coffee/server.coffee'
+            output:   '../nodejs/js/index.js'

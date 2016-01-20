@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/game.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4">
+                <div class="thumbnail">
+                    <img src="https://chart.googleapis.com/chart?cht=qr&amp;chs=384x384&amp;chld=M&amp;chl={{ url('app_default_play', {id: game.id}) }}"/>
+
+                    <div class="caption">
+                        <h2 class="text-center">賓果遊戲</h2>
+
+                        <h3>{{ url('app_default_play', {id: game.id}) }}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <a id="gamestart" class="btn btn-primary btn-lg col-xs-12" href="#" role="button">開始遊戲</a>
+                </div>
+            </div>
+        </div>
+        <div class="row col-xs-8 col-xs-offset-2 space" id="waiting-players">
+            <h3></h3>
+        </div>
+    </div>
+{% endblock %}

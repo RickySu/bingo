@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/playing.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <input id="player-id" type="hidden" value="{{ player.id }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-lg-4 col-lg-offset-4 space">
+                <div class="row">
+                    <h2>我是: {{ player.name }}</h2>
+                    <h3>連線: <span id="my-lines">{{ player.lines }}</span></h3>
+                    <h4>目前輪到: <span id="current-playername"></span></h4>
+                </div>
+            </div>
+            <div class="col-xs-10 col-xs-offset-1 col-lg-4 col-lg-offset-4 space" id="numbers">
+                {% for row in 0..4 %}
+                    {% for col in 0..4 %}
+                        <button class="btn" data-row="{{ row }}" data-col="{{ col }}">
+                            <div>
+                                <table>
+                                    <tr><td align="center" valign="middle" data-number>{{ player.numbers[row][col] }}</td></tr>
+                                </table>
+                            </div>
+                        </button>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
