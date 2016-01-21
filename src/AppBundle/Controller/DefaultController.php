@@ -106,6 +106,10 @@ class DefaultController extends Controller
             try {
                 $player->reload(true);
                 $session->set('player', $player);
+                if($player->getGameId() != $game->getId()){
+                    $session->remove('player');
+                    return $this->redirectToRoute("app_default_play", array('id' => $game->getId()));
+                }
             }catch (\PropelException $e){
                 $session->remove('player');
                 return $this->redirectToRoute("app_default_play", array('id' => $game->getId()));
