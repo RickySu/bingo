@@ -11,10 +11,18 @@
 
 {% block body %}
     <div class="container-fluid">
+            <div id="start-new-game" class="row space" {% if game.status != constant("AppBundle\\Model\\GamePeer::STATUS_FINISH") %}style="display:none"{% endif %}>
+                <a href="{{ path('app_default_game') }}" class="col-xs-8 col-xs-offset-2 btn btn-success btn-lg">遊戲結束，重開啟新遊戲</a>
+            </div>
         <div class="row space">
             <div id="gaming" class="col-xs-8 col-xs-offset-2">
                 {% for player in game.sortedPlayers %}
-                <div class="panel panel-default{% if player.id == currentPlayer.id %} panel-primary{% endif %}" data-player="{{ player.id }}">
+                <div class="panel panel-default
+                {%- if game.status == constant("AppBundle\\Model\\GamePeer::STATUS_FINISH") and player.lines >=5 %}
+                 panel-danger
+                {%- elseif game.status == constant("AppBundle\\Model\\GamePeer::STATUS_GAMING") and player.id == currentPlayer.id %}
+                 panel-primary
+                {%- endif -%}" data-player="{{ player.id }}">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-warning btn-lgs" disabled="disabled" data-line>{{ player.lines }}</button>
                         {{ player.name }}

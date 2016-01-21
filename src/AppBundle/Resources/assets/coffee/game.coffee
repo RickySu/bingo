@@ -81,5 +81,6 @@ $ () ->
         $("*[data-player]").removeClass 'panel-primary'
         for id in winner
             $("*[data-player=#{id}]").addClass 'panel-danger'
+        $('#start-new-game').show()
         return
     return

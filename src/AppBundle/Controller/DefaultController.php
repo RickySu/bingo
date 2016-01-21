@@ -25,6 +25,10 @@ class DefaultController extends Controller
         }
         try {
             $game->reload(true);
+            if($game->getStatus() == Model\GamePeer::STATUS_FINISH){
+                $session->remove('game');
+                return $this->redirectToRoute("app_default_game");
+            }
         }catch (\PropelException $e){
             $session->remove('game');
             return $this->redirectToRoute("app_default_game");
@@ -52,7 +56,7 @@ class DefaultController extends Controller
      */
     public function gamingAction(Request $request, Model\Game $game)
     {
-        if($game->getStatus() != Model\GamePeer::STATUS_GAMING){
+        if($game->getStatus() == Model\GamePeer::STATUS_PREPARE){
             throw $this->createNotFoundException();
         }
         $currentPlayer = $game->getCurrentPlayer();
@@ -285,7 +289,7 @@ class DefaultController extends Controller
     protected function gameover(Model\Game $game, $winner)
     {
         $game->setStatus(Model\GamePeer::STATUS_FINISH);
-        //$game->save();
+        $game->save();
         $this->emit('player', 'gameover', $winner);
     }
 
